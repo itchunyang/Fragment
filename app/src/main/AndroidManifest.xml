@@ -20,7 +20,6 @@
         <activity android:name=".GeneralFragmentActivity" />
         <activity android:name=".CommunicationActivity" />
         <activity android:name=".ListFragmentActivity" />
-        <activity android:name=".DialogFragmentActivity"></activity>
     </application>
 
 </manifest>

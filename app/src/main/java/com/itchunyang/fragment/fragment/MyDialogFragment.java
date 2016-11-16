@@ -1,12 +1,14 @@
 package com.itchunyang.fragment.fragment;
 
-import android.app.Dialog;
 import android.app.DialogFragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+
+import com.itchunyang.fragment.R;
 
 /**
  * Created by lcy on 2016/11/15.
@@ -18,15 +20,23 @@ public class MyDialogFragment extends DialogFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
+        getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
+        return inflater.inflate(R.layout.fragment_dialog,container,false);
     }
 
-    /**
-     * 对于简单的对话框，可以通过AlterDialog.Builder直接创建对话框的UI，本例用于告警框.
-     * AlertDialog.Builder在Android 3.0版本之前的创建对话框方式，在之后的版本中，可用在DialogFragment中，适用于创建简单对话框。
-     */
-    @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
-        return super.onCreateDialog(savedInstanceState);
-    }
+
+    //就没有一种快一点的方式来建立对话框么？快用onCreatDialog吧！
+    //通过它返回的是一个Dialog对象，这个对象就会被显示到屏幕上
+    //千万别同时使用onCreatView和onCreatDialog方法，他们仅仅是为了完成同样一个目的的两条路而已。
+//    @Override
+//    public Dialog onCreateDialog(Bundle savedInstanceState) {
+//        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+//        builder.setTitle("用户申明")
+//                .setMessage("hello world")
+//                .setPositiveButton("我同意", null)
+//                .setNegativeButton("不同意", null)
+//                .setCancelable(false);
+//
+//        return builder.create();
+//    }
 }

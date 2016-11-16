@@ -1,9 +1,13 @@
 package com.itchunyang.fragment;
 
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+
+import com.itchunyang.fragment.fragment.MyDialogFragment;
 
 /**
  * fragment是3.0以后的东西
@@ -43,7 +47,18 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(this, ListFragmentActivity.class));
     }
 
-    public void DialogFragment(View view) {
-        startActivity(new Intent(this, DialogFragmentActivity.class));
+    public void dialogFragment(View view) {
+
+        /**
+         * 为了不重复显示dialog，在显示对话框之前移除正在显示的对话框。
+         */
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        Fragment fragment = getFragmentManager().findFragmentByTag("MyDialogFragment");
+        if (null != fragment) {
+            ft.remove(fragment);
+        }
+
+        //上面的那个空白的title好丑 getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE)
+        new MyDialogFragment().show(getFragmentManager(),"MyDialogFragment");
     }
 }
